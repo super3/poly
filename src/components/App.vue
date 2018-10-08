@@ -1,7 +1,26 @@
 <template>
-	<h1>Hello, World!</h1>
+	<div>
+		<pre v-for="log in logs">{{log}}</pre>
+	</div>
 </template>
 
 <script>
-module.exports = {};
+const { Pipeline, TransformModule } = require('pipeline');
+const Puller = require('../modules/Puller');
+
+module.exports = {
+	data: () => ({
+		logs: []
+	}),
+	created() {
+		const Logger = TransformModule.create(x => {
+			this.logs.push(JSON.stringify(x));
+		});
+
+		new Pipeline([
+			new Puller('https://montyanderson.net/style.css', 1),
+			new Logger()
+		]);
+	}
+};
 </script>
