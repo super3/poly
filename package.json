@@ -1,7 +1,7 @@
 {
-  "name": "webapp-template",
+  "name": "poly",
   "version": "1.0.0",
-  "description": "A template for Ovso web apps",
+  "description": "In-browser machine learning pipeline",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ovsoinc/webapp-template.git"
+    "url": "git+https://github.com/ovsoinc/poly.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ovsoinc/webapp-template/issues"
+    "url": "https://github.com/ovsoinc/poly/issues"
   },
-  "homepage": "https://github.com/ovsoinc/webapp-template#readme",
+  "homepage": "https://github.com/ovsoinc/poly#readme",
   "dependencies": {
     "babel-minify": "^0.5.0",
     "browserify": "^16.2.3",
