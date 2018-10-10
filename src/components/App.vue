@@ -6,6 +6,7 @@
 
 <script>
 const { Pipeline, TransformModule } = require('pipeline');
+const { ImageReader, ImageCropper, ImageWriter } = require('pipeline-image');
 const Puller = require('../modules/Puller');
 
 module.exports = {
@@ -18,7 +19,11 @@ module.exports = {
 		});
 
 		new Pipeline([
-			new Puller('https://montyanderson.net/style.css', 1),
+			new Puller('image.jpg', 1),
+			new (TransformModule.create(async (...args) => console.log(args))),
+			new ImageReader(),
+			new ImageCropper(0, 0, 50, 50),
+			new ImageWriter(),
 			new Logger()
 		]);
 	}
