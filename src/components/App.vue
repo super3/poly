@@ -16,20 +16,20 @@
 				<h4>Sources</h4>
 
 				<div class="row">
-					<Module v-for="module in sourceModules" v-bind:module="module" v-on:new="newModule(module)"></Module>
+					<Module v-for="module in sourceModules" v-bind:module="module" v-on:new="pushInstance"></Module>
 				</div>
 
 				<h4>Transform</h4>
 
 
 				<div class="row">
-					<Module v-for="module in sourceModules" v-bind:module="module" v-on:new="newModule(module)"></Module>
+					<Module v-for="module in sourceModules" v-bind:module="module" v-on:new="pushInstance"></Module>
 			  	</div>
 
 				<h4>Instances</h4>
 
 				<div class="row">
-					<ModuleInstance v-for="instance in moduleInstances" v-bind:instance="instance"></ModuleInstance>
+					<ModuleInstance v-for="instance in instances" v-bind:instance="instance"></ModuleInstance>
 				</div>
 			</div>
 		</div>
@@ -50,11 +50,11 @@ module.exports = {
 		transformModules: [
 
 		],
-		moduleInstances: []
+		instances: []
 	}),
 	methods: {
-		newModule(module) {
-			this.moduleInstances.push(new module());
+		pushInstance(instance) {
+			this.instances.push(instance);
 		}
 	},
 	components: {
