@@ -13,10 +13,10 @@
 				</div>
 
 				<div class="d-flex justify-content-between align-items-center">
-					<div class="btn-group" >
-						<button v-on:click="instance.start" v-bind:disabled="!instance.started" type="button" class="btn btn-sm btn-outline-secondary">Start</button>
+					<div class="btn-group" v-if="isSourceModule">
+						<button v-on:click="$emit('start')" v-bind:disabled="instance.started" type="button" class="btn btn-sm btn-outline-secondary">Start</button>
 
-						<button v-on:click="instance.stop" v-bind:disabled="instance.started" type="button" class="btn btn-sm btn-outline-secondary">Stop</button>
+						<button v-on:click="$emit('stop')" v-bind:disabled="!instance.started" type="button" class="btn btn-sm btn-outline-secondary">Stop</button>
 					</div>
 				</div>
 			</div>
@@ -31,9 +31,13 @@ module.exports = {
 	props: [
 		'instance'
 	],
+	computed: {
+		isSourceModule() {
+			return this.instance instanceof SourceModule;
+		}
+	},
 	data: () => ({
-		SourceModule,
-		TransformModule
+
 	})
 };
 </script>

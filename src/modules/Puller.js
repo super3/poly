@@ -6,15 +6,17 @@ class Puller extends SourceModule {
 		super();
 
 		Object.assign(this, inputs);
+
+		this.started = false;
 	}
 
 	start() {
 		this.started = true;
 
 		this.interval = setInterval(async () => {
-			const { data } = axios.get(this.url);
+			const { data } = await axios.get(this.url);
 
-			this.emit('data', data);
+			this.emit('output', data);
 		}, 1000 / this.fps);
 	}
 

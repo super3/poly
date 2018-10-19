@@ -23,14 +23,20 @@
 
 
 				<div class="row">
-					<Module v-for="module in sourceModules" v-bind:module="module" v-on:new="pushInstance"></Module>
+					<Module v-for="module in transformModules" v-bind:module="module" v-on:new="pushInstance"></Module>
 			  	</div>
 
 				<h4>Instances</h4>
 
 				<div class="row">
-					<ModuleInstance v-for="instance in instances" v-bind:instance="instance"></ModuleInstance>
+					<ModuleInstance v-for="instance in instances" v-bind:instance="instance" v-on:start="start(instance)" v-on:stop="stop(instance)"></ModuleInstance>
 				</div>
+
+				<h5>Logs</h5>
+
+				<pre>
+					<span v-for="log in logs">{{log}}</span>
+				</pre>
 			</div>
 		</div>
 	</div>
@@ -39,7 +45,10 @@
 <script>
 const { Pipeline, TransformModule } = require('pipeline');
 const { ImageReader, ImageCropper, ImageWriter } = require('pipeline-image');
+
 const Puller = require('../modules/Puller');
+
+const Logger = require('../modules/Logger');
 
 module.exports = {
 	data: () => ({
@@ -48,13 +57,34 @@ module.exports = {
 			Puller
 		],
 		transformModules: [
-
+			Logger
 		],
-		instances: []
+		instances: [],
+		logs: []
 	}),
 	methods: {
+		start(instance) {
+			instance.start();
+		},
+		stop(instance) {
+			instance.stop();
+		},
 		pushInstance(instance) {
-			this.instances.push(instance);
+			const index = this.instances.push(instance);
+
+			instance.on('output', output => {
+				const nextInstance = this.instances[index + 1];
+
+				console.log(instance, nextInstance, output);
+
+				if(nextInstance !== undefined) {
+					nextInstance.emit('input', output);
+				}
+			});
+
+			instance.on('log', log => {
+				this.logs.push(log);
+			});
 		}
 	},
 	components: {
