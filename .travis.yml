@@ -1,0 +1,16 @@
+language: node_js
+
+node_js:
+    "node"
+
+after_script:
+    - git config user.name "Travis-CI"
+    - git config user.email "travis@poly"
+    - rm -rf .git
+    - cd public
+    - rm .gitignore
+    - git init
+    - git checkout -b gh-pages
+    - git add .
+    - git commit -m "Deployed to Github Pages"
+    - git push --force "https://$GH_TOKEN@github.com/ovsoinc/poly" gh-pages
