@@ -37,7 +37,10 @@ module.exports = {
 			for(const key in inputs)
 				inputs[key] = this.module.inputs[key](inputs[key]);
 
-			const instance = new this.module(inputs);
+			const instance = new this.module();
+
+			// remove once pipeline fix
+			Object.assign(instance, inputs);
 
 			this.$emit('new', instance);
 		}
