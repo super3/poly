@@ -13,6 +13,12 @@
 				</div>
 
 				<div class="d-flex justify-content-between align-items-center">
+					<div v-if="instance.tasks">
+						<strong>Tasks:</strong> {{instance.tasks.length}}
+					</div>
+				</div>
+
+				<div class="d-flex justify-content-between align-items-center">
 					<div class="btn-group">
 						<button v-if="isSourceModule" v-on:click="$emit('start')" v-bind:disabled="instance.started" type="button" class="btn btn-sm btn-outline-secondary">Start</button>
 

@@ -9,7 +9,12 @@
 						<div class="input-group-text">{{key}}</div>
 					</div>
 
-					<input v-model="inputs[key]" type="text" class="form-control col-xs-12" v-bind:placeholder="key">
+					<input v-if="value === String" v-model="inputs[key]" type="text" class="form-control col-xs-12" v-bind:placeholder="key">
+					<input v-if="value === Number" v-model="inputs[key]" type="number" class="form-control col-xs-12" v-bind:placeholder="key">
+
+					<select v-if="value instanceof Select" v-model="inputs[key]">
+						<option v-for="option in value.options" v-bind:value="option" class="form-control col-xs-12">{{option}}</option>
+					</select>
 				</div>
 
 				<div class="d-flex justify-content-between align-items-center">
@@ -23,19 +28,22 @@
 </template>
 
 <script>
+const Select = require('../lib/Select');
+
 module.exports = {
 	props: [
 		"module"
 	],
 	data: () => ({
-		inputs: {}
+		inputs: {},
+		Select
 	}),
 	methods: {
 		newInstance() {
 			const inputs = Object.assign(this.inputs);
 
-			for(const key in inputs)
-				inputs[key] = this.module.inputs[key](inputs[key]);
+			//for(const key in inputs)
+			// 	inputs[key] = this.module.inputs[key](inputs[key]);
 
 			const instance = new this.module();
 

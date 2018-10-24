@@ -25,6 +25,7 @@
     "jimp": "^0.5.3",
     "pipeline": "git+https://github.com/ovsoinc/pipeline.git#562c666",
     "pipeline-image": "git+https://github.com/ovsoinc/pipeline-image.git#9af07e2",
+    "polynet": "0.0.1",
     "vue": "^2.5.17",
     "vueify": "^9.4.1",
     "watchify": "^3.11.0"

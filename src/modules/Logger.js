@@ -1,4 +1,5 @@
 const { TransformModule } = require('pipeline');
+const Select = require('../lib/Select');
 
 class Logger extends TransformModule {
 	constructor() {
@@ -18,7 +19,12 @@ class Logger extends TransformModule {
 
 Logger.inputs = {
 	name: String,
-	type: String
+	type: new Select(
+		'utf8',
+		'image/jpeg',
+		'image/png',
+		'image/bmp'
+	)
 };
 
 module.exports = Logger;

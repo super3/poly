@@ -13,6 +13,8 @@
 
 		<div class="album py-5 bg-light">
 			<div class="container">
+				<button v-on:click="save" class="btn btn-primary">Save</button>
+
 				<h4>Sources</h4>
 
 				<div class="row">
@@ -58,6 +60,7 @@ pipelineImage.Jimp = window.Jimp;
 
 const Puller = require('../modules/Puller');
 const Logger = require('../modules/Logger');
+const TrafficLightDetector = require('../modules/TrafficLightDetector');
 
 module.exports = {
 	data: () => ({
@@ -69,12 +72,45 @@ module.exports = {
 			ImageReader,
 			ImageCropper,
 			ImageWriter,
-			Logger
+			Logger,
+			TrafficLightDetector
 		],
 		instances: [],
 		logs: []
 	}),
+	computed: {
+		modules() {
+			return [ ...this.sourceModules, ...this.transformModules ];
+		}
+	},
+	created() {
+		if(localStorage.getItem('instances')) {
+			const instances = JSON.parse(localStorage.getItem('instances'));
+
+			for(const instance of instances) {
+				const module = this.modules.find(module => module.name === instance.module);
+
+				this.instances.push(Object.assign(new module(), instance.inputs));
+			}
+		}
+	},
 	methods: {
+		save() {
+			const data = this.instances.map(instance => {
+				const inputs = {};
+
+				for(let key in instance.constructor.inputs) {
+					inputs[key] = instance[key];
+				}
+
+				return {
+					module: instance.constructor.name,
+					inputs
+				}
+			});
+
+			localStorage.setItem('instances', JSON.stringify(data));
+		},
 		start(instance) {
 			instance.start();
 		},

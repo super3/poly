@@ -1,5 +1,6 @@
 const { SourceModule } = require('pipeline');
 const axios = require('axios');
+const Select = require('../lib/Select');
 
 class Puller extends SourceModule {
 	constructor(inputs) {
@@ -15,7 +16,7 @@ class Puller extends SourceModule {
 
 		this.interval = setInterval(async () => {
 			const { data } = await axios.get(this.url, {
-				responseType: 'arraybuffer'
+				responseType: this.type
 			});
 
 			this.emit('output', data);
@@ -31,7 +32,11 @@ class Puller extends SourceModule {
 
 Puller.inputs = {
 	url: String,
-	fps: Number
+	fps: Number,
+	type: new Select(
+		'utf8',
+		'arraybuffer'
+	)
 };
 
 module.exports = Puller;
