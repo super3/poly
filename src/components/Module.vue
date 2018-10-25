@@ -42,8 +42,9 @@ module.exports = {
 		newInstance() {
 			const inputs = Object.assign(this.inputs);
 
-			//for(const key in inputs)
-			// 	inputs[key] = this.module.inputs[key](inputs[key]);
+			for(const key in inputs)
+				if(typeof this.module.inputs[key] === 'function')
+					inputs[key] = this.module.inputs[key](inputs[key]);
 
 			const instance = new this.module();
 
