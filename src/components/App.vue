@@ -41,7 +41,6 @@
 						{{typeof log.data}}
 						{{log.data.length}}
 						<img v-bind:src="imageSrc(log.data)">
-
 					</span>
 				</pre>
 			</div>
@@ -53,7 +52,7 @@
 const { Pipeline, TransformModule } = require('pipeline');
 const base64ArrayBuffer = require('../lib/base64ArrayBuffer');
 
-const pipelineImage = require('pipeline-image');
+const pipelineImage = require('../modules/Image');
 const { ImageReader, ImageCropper, ImageWriter } = pipelineImage;
 
 pipelineImage.Jimp = window.Jimp;
@@ -90,7 +89,7 @@ module.exports = {
 			for(const instance of instances) {
 				const module = this.modules.find(module => module.name === instance.module);
 
-				this.instances.push(Object.assign(new module(), instance.inputs));
+				this.pushInstance(Object.assign(new module(), instance.inputs));
 			}
 		}
 	},

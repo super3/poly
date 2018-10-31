@@ -6,7 +6,7 @@ const net = Object.assign(new PolyNet(), require('./TrafficLightDetectorNet.json
 
 net.f = x => x / (1 + Math.abs(x));
 
-module.exports = class TrafficLightDetector extends TransformModule {
+class TrafficLightDetector extends TransformModule {
 	constructor() {
 		super();
 	}
@@ -25,3 +25,7 @@ module.exports = class TrafficLightDetector extends TransformModule {
 		return colors[indexOfMax(outputs)];
 	}
 };
+
+TrafficLightDetector.inputs = {};
+
+module.exports = TrafficLightDetector;

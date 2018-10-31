@@ -30,6 +30,8 @@ class Puller extends SourceModule {
 	}
 }
 
+Puller.description = "Repeatedly perform GET requests on a URL";
+
 Puller.inputs = {
 	url: String,
 	fps: Number,

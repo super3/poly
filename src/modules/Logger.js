@@ -17,6 +17,8 @@ class Logger extends TransformModule {
 	}
 }
 
+Logger.description = "Log to console";
+
 Logger.inputs = {
 	name: String,
 	type: new Select(

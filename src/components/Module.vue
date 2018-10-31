@@ -4,6 +4,8 @@
 			<div class="card-body">
 				<h5 class="card-title">{{module.name}}</h5>
 
+				<p v-if="module.description" class="card-description grey-color">{{module.description}}</p>
+
 				<div v-for="(value, key) in module.inputs" class="input-group card-text" style="padding-bottom: 15px;">
 					<div class="input-group-prepend">
 						<div class="input-group-text">{{key}}</div>
