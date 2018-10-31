@@ -1,4 +1,5 @@
 const { TransformModule } = require('pipeline');
+const Select = require('../lib/Select');
 
 const promisify = f => (...args) => new Promise((resolve, reject) => f(...args, (err, res) => err ? reject(err) : resolve(res)));
 
@@ -42,7 +43,11 @@ class ImageWriter extends TransformModule {
 }
 
 ImageWriter.inputs = {
-	format: String
+	format: new Select(
+		'image/jpeg',
+		'image/png',
+		'image/bmp'
+	)
 };
 
 module.exports = {

@@ -40,7 +40,7 @@
 					<span v-for="log in logs">
 						{{typeof log.data}}
 						{{log.data.length}}
-						<img v-bind:src="imageSrc(log.data)">
+						<p v-if="log.type === 'utf8'">{{log.data}}</p><img v-else v-bind:src="imageSrc(log.data)">
 					</span>
 				</pre>
 			</div>
