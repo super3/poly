@@ -31,7 +31,7 @@
 				<h4>Instances</h4>
 
 				<div class="row">
-					<ModuleInstance v-for="instance in instances" v-bind:instance="instance" v-on:start="start(instance)" v-on:stop="stop(instance)" v-on:remove="remove(instance)"></ModuleInstance>
+					<ModuleInstance v-for="instance in instances" v-bind:instance="instance" v-on:start="start(instance)" v-on:stop="stop(instance)" v-on:remove="remove(instance)" v-on:move-left="moveLeft(instance)" v-on:move-right="moveRight(instance)"></ModuleInstance>
 				</div>
 
 				<h5>Logs</h5>
@@ -132,6 +132,18 @@ module.exports = {
 			instance.on('log', log => {
 				this.logs.unshift(log);
 			});
+		},
+		moveLeft(instance) {
+			const index = this.instances.indexOf(instance);
+
+			this.instances.splice(index, 1);
+			this.instances.splice(Math.min(index - 1, 0), 0, instance);
+		},
+		moveRight(instance) {
+			const index = this.instances.indexOf(instance);
+
+			this.instances.splice(index, 1);
+			this.instances.splice(Math.max(index + 1, this.instances.length - 1), 0, instance);
 		},
 		remove(instance) {
 			if(typeof instance.stop === 'function')

@@ -24,6 +24,10 @@
 
 						<button  v-if="isSourceModule" v-on:click="$emit('stop')" v-bind:disabled="!instance.started" type="button" class="btn btn-sm btn-outline-secondary">Stop</button>
 
+
+						<button v-on:click="$emit('move-left')" type="button" class="btn btn-sm btn-outline-secondary">Move Left</button>
+						<button v-on:click="$emit('move-right')" type="button" class="btn btn-sm btn-outline-secondary">Move Right</button>
+
 						<button v-on:click="$emit('remove')" type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
 					</div>
 				</div>
