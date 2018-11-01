@@ -15,7 +15,9 @@ class Puller extends SourceModule {
 		this.started = true;
 
 		this.interval = setInterval(async () => {
-			const { data } = await axios.get(this.url, {
+			const url = this.proxy === 'NY' ? `http://142.93.76.28:3000/${url}` : url;
+
+			const { data } = await axios.get(url, {
 				responseType: this.type
 			});
 
@@ -38,6 +40,10 @@ Puller.inputs = {
 	type: new Select(
 		'utf8',
 		'arraybuffer'
+	),
+	proxy: new Select(
+		'none',
+		'NY'
 	)
 };
 
