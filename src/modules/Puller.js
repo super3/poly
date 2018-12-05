@@ -15,7 +15,7 @@ class Puller extends SourceModule {
 		this.started = true;
 
 		this.interval = setInterval(async () => {
-			const url = this.proxy === 'NY' ? `http://142.93.76.28:3000/${url}` : url;
+			const url = this.proxy === 'YaCDN' ? `https://yacdn.org/proxy/${url}` : url;
 
 			const { data } = await axios.get(url, {
 				responseType: this.type
