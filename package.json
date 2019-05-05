@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "cp node_modules/jimp/browser/lib/jimp.min.js public/ && browserify -t vueify -e src/index.js | babel-minify --mangle false > public/bundle.js",
-    "dev": "watchify -t vueify -e src/index.js -o public/bundle.js"
+    "prepare": "npm run snyk-protect; cp node_modules/jimp/browser/lib/jimp.min.js public/ && browserify -t vueify -e src/index.js | babel-minify --mangle false > public/bundle.js",
+    "dev": "watchify -t vueify -e src/index.js -o public/bundle.js",
+    "snyk-protect": "snyk protect"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,8 @@
     "polynet": "0.0.1",
     "vue": "^2.5.21",
     "vueify": "^9.4.1",
-    "watchify": "^3.11.0"
-  }
+    "watchify": "^3.11.0",
+    "snyk": "^1.161.1"
+  },
+  "snyk": true
 }
