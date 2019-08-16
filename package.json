@@ -20,7 +20,7 @@
   "homepage": "https://github.com/ovsoinc/poly#readme",
   "dependencies": {
     "axios": "^0.19.0",
-    "babel-minify": "^0.5.0",
+    "babel-minify": "^0.5.1",
     "browserify": "^16.3.0",
     "jimp": "^0.6.4",
     "pipeline": "git+https://github.com/ovsoinc/pipeline.git#562c666",
