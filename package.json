@@ -22,7 +22,7 @@
     "axios": "^0.19.0",
     "babel-minify": "^0.5.0",
     "browserify": "^16.3.0",
-    "jimp": "^0.6.4",
+    "jimp": "^0.8.4",
     "pipeline": "git+https://github.com/ovsoinc/pipeline.git#562c666",
     "pipeline-image": "git+https://github.com/ovsoinc/pipeline-image.git#248d3be",
     "polynet": "0.0.1",
