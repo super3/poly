@@ -26,7 +26,7 @@
     "pipeline": "git+https://github.com/ovsoinc/pipeline.git#562c666",
     "pipeline-image": "git+https://github.com/ovsoinc/pipeline-image.git#248d3be",
     "polynet": "0.0.1",
-    "vue": "^2.6.10",
+    "vue": "^2.6.12",
     "vueify": "^9.4.1",
     "watchify": "^3.11.1"
   }
